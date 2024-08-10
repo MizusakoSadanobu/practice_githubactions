@@ -7,9 +7,8 @@ on:
         default: Hello
         required: true
         description: A cheerful word
-
 jobs:
   run:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     stesps:
       - run: echo "${{inputs.greeting}}"
