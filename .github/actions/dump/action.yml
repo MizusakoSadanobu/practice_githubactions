@@ -11,16 +11,16 @@ outputs:
   dumped-date: #出力を識別するためのID。呼び出し側とのインターフェースになる
     value: ${{steps.current.outputs.date}}$ #コンテクスト経由で値を設定することが多い
     description: ダンプ日時
-  runs:
-    using: composite
-    steps:
-      - run: printenv | sort
-        shell: bash #メタデータ構文ではshellを省略できない
-      - run: echo "${CONTEXT}$"
-        if: ${{inputs.enable-context == 'true'}}
-        env:
-          CONTEXT: ${{toJSON(github)}}
-        shell: bash #メタデータ構文ではshellを省略できない
-      - id: current
-        run: echo "date=$(date)" >> "${GITHUB_OUTPUT}"
-        shell: bash #メタデータ構文ではshellを省略できない
+runs:
+  using: composite
+  steps:
+    - run: printenv | sort
+      shell: bash #メタデータ構文ではshellを省略できない
+    - run: echo "${CONTEXT}$"
+      if: ${{inputs.enable-context == 'true'}}
+      env:
+        CONTEXT: ${{toJSON(github)}}
+      shell: bash #メタデータ構文ではshellを省略できない
+    - id: current
+      run: echo "date=$(date)" >> "${GITHUB_OUTPUT}"
+      shell: bash #メタデータ構文ではshellを省略できない
