@@ -9,3 +9,19 @@ jobs:
       - run: |
           git log -1
           tree -a .
+
+name: Manual
+on:
+  workflow_dispatch:
+    inputs:
+      greeting:
+        type: string
+        default: Hello
+        required: true
+        description: A cheerful word
+
+jobs:
+  run:
+    runs-on: ubuntu-lates
+    stesps:
+      - run: echo "${{inputs.greeting}}"
